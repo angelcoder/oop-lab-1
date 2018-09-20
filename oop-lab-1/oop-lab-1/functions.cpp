@@ -10,13 +10,9 @@
 #include <cmath>
 #include <vector>
 
-using namespace std;
-
-#define For for (int i = 0; i < nNum; ++i)
-
 const uint a = 1103515245;
 const uint c = 12345;
-const uint m = 4294967291; //2^32-5
+const uint m = 4294967291; // 2^32-5
 const uint d = 3;
 const uint nNum= 100000;
 
@@ -34,8 +30,8 @@ uint num2 = 1;
 uint num3_1 = 1; uint num3_2 = 1;
 uint num4 = 1;
 
-void srand(uint seedNum){ num1 = seedNum; num2 = seedNum;}
-double rand1(){
+void srand(uint seedNum) { num1 = seedNum; num2 = seedNum; }
+double rand1() {
     num1 = (a * num1 + c) % m;
     return (double)(num1) / m;;
 }
@@ -51,11 +47,11 @@ double rand3() {
     return (double)(num3_1) / m;
 }
 
-uint modInv(ll A, ll n){
+uint modInv(ll A, ll n) {
     ll b0 = n, t, q;
     ll x0 = 0, x1 = 1;
     if (n == 1) return 1;
-    while (A > 1){
+    while (A > 1) {
         q = A / n;
         t = n; n = A % n; A = t;
         t = x0; x0 = x1 - q * x0; x1 = t;
@@ -64,7 +60,7 @@ uint modInv(ll A, ll n){
     return (uint)x1;
 }
 
-double rand4(){
+double rand4() {
     num4 = (a4 * modInv(num4, p) + c4) % p;
     return (double)(num4) / m;
 }
@@ -76,13 +72,13 @@ double rand5(){
     return a;
 }
 
-double rand6(){
+double rand6() {
     double sum = 0;
-    for (int i = 1; i <= 12; ++i) sum += rand1();
+    for (int i = 0; i < 12; ++i) sum += rand1();
     return (med + (sum - 6) * sigma);
 }
 
-double rand7(){
+double rand7() {
     double u1, u2, v1, v2, s;
     do{
         u1 = rand1();
@@ -96,7 +92,7 @@ double rand7(){
     return (rand1() > 0.5) ? x1 : x2;
 }
 
-double rand8(){
+double rand8() {
     double u = rand1(), v, x;
     do{
         do{ v = rand1();} while (v == 0);
@@ -105,14 +101,14 @@ double rand8(){
     return x;
 }
 
-double rand9(){
+double rand9() {
     double x = 1.0;
     double U = rand1();
     if (U != 0) x = -miu * log(U);
     return x;
 }
 
-double rand10(){
+double rand10() {
     double U, x, y, V;
     do{
         do{
@@ -125,33 +121,28 @@ double rand10(){
     return x;
 }
 
-void plusFreq(vector<int>& frequency, double N, double low, double high, int quantity){
+void plusFreq(std::vector<int>& frequency, double N, double low, double high, int quantity) {
     ++frequency[(N - low) / (high - low) * quantity];
 }
 
-void printNumbers(int quantity, int method){
-    double low = 0, high = 1;
-    vector<int> frequqency(quantity, defaultValue);
-    switch(method){
-        case '1': For{ double N = rand1(); plusFreq(frequqency, N, low, high, quantity);} break;
-        case '2': For{ double N = rand2(); plusFreq(frequqency, N, low, high, quantity);} break;
-        case '3': For{ double N = rand3(); plusFreq(frequqency, N, low, high, quantity);} break;
-        case '4': For{ double N = rand4(); plusFreq(frequqency, N, low, high, quantity);} break;
-        case '5': For{ double N = rand5(); plusFreq(frequqency, N, low, high, quantity);} break;
-        case '6': For{ double N = rand6(); low = -3; high = 3; plusFreq(frequqency, N, low, high, quantity);} break;
-        case '7': For{ double N = rand7(); low = -3; high = 3; plusFreq(frequqency, N, low, high, quantity);} break;
-        case '8': For{ double N = rand8(); low = -3; high = 3; plusFreq(frequqency, N, low, high, quantity);} break;
-        case '9': For{ double N = rand9(); low = 0; high = 100; plusFreq(frequqency, N, low, high, quantity);} break;
-        case '0': For{ double N = rand10(); low = 0; high = 100; plusFreq(frequqency, N, low, high, quantity);} break;
+void printNumbers(std::string methodName, int quantity, double(*function)(), double low, double high) {
+    std::cout << "you chose " << methodName << std::endl;
+    std::vector<int> frequqency(quantity, defaultValue);
+    double sum = 0.0;
+    for (int i = 0; i < nNum; ++i) {
+        double N = function();
+        plusFreq(frequqency, N, low, high, quantity);
     }
-    for (int i = 0; i < quantity; ++i){
-        cout << setprecision(1) << fixed << "[";
-        cout << low + ((high - low) / quantity) * i;
-        cout << ", ";
+    for (int i = 0; i < quantity; ++i) {
+        std::cout << std::setprecision(1) << std::fixed << "[";
+        std::cout << low + ((high - low) / quantity) * i;
+        std::cout << ", ";
         double high_ = low + ((high - low) / quantity) * (i + 1);
-        cout << high_;
-        high_ == 1 ? cout << "]  " : cout << ")  ";
-        cout << setprecision(5) << fixed << '\t';
-        cout << (double)frequqency[i] / nNum << endl;
+        std::cout << high_;
+        high_ == 1 ? std::cout << "]  " : std::cout << ")  ";
+        std::cout << std::setprecision(5) << std::fixed << '\t';
+        std::cout << (double)frequqency[i] / nNum << std::endl;
+        sum+=(double)frequqency[i] / nNum ;
     }
+    std::cout << sum << std::endl << std::endl;
 }

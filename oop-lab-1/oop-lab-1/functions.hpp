@@ -11,10 +11,7 @@
 
 #include <stdio.h>
 #include <iostream>
-#include <vector>
 #include <iomanip>
-
-using namespace std;
 
 typedef unsigned int uint;
 typedef long long ll;
@@ -35,7 +32,7 @@ double rand8();
 double rand9();
 double rand10();
 
-void plusFreq(vector<int>& frequency, double N, double low, double high, int quantity);
-void printNumbers(int quantity, int method);
+void plusFreq(std::vector<int>& frequency, double N, double low, double high, int quantity);
+void printNumbers(std::string methodName, int quantity, double(*function)(), double low, double high);
 
 #endif /* functions_hpp */
