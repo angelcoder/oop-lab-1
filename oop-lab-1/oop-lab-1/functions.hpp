@@ -2,7 +2,7 @@
 //  functions.hpp
 //  oop-lab-1
 //
-//  Created by Anhelina Lohvina on 19.09.2018.
+//  Created by Anhelina Lohvina on 06.09.2018.
 //  Copyright © 2018 Anhelina Lohvina. All rights reserved.
 //
 
@@ -35,9 +35,7 @@ double rand8();
 double rand9();
 double rand10();
 
-
 void plusFreq(vector<int>& frequency, double N, double low, double high, int quantity);
-
 void printNumbers(int quantity, int method);
 
 #endif /* functions_hpp */

@@ -12,6 +12,7 @@
 #include <limits>
 #include "functions.hpp"
 #include <cmath>
+
 using namespace std;
 
 const string m1 = "linear congruencs method";
@@ -39,6 +40,7 @@ void methodsInfo(){
     cout << "9 - " << m9 << endl;
     cout << "0 - " << m10 << endl;
 }
+
 int main() {
     srand((uint)time(nullptr));
     int quantity = 10;

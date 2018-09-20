@@ -73,7 +73,6 @@ double rand5(){
     double x = rand1(), y = rand1();
     double a = 1.0;
     a= (x >= y) ? (x - y) : (x - y + 1);
-    cout<<a<<' ';
     return a;
 }
 
